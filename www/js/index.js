@@ -1,21 +1,24 @@
-/*
- * Licensed to the Apache Software Foundation (ASF) under one
- * or more contributor license agreements.  See the NOTICE file
- * distributed with this work for additional information
- * regarding copyright ownership.  The ASF licenses this file
- * to you under the Apache License, Version 2.0 (the
- * "License"); you may not use this file except in compliance
- * with the License.  You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing,
- * software distributed under the License is distributed on an
- * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- * KIND, either express or implied.  See the License for the
- * specific language governing permissions and limitations
- * under the License.
- */
+
+
+var ajx = 
+{
+	funcion_er: function(){
+		alert('error al comunicarse con el servidor');
+	},
+
+	enviar_peticion: function(funcion_su, funcion_er)
+	{
+		if (funcion_er == "") funcion_er = ajx.funcion_er,
+		$.ajax({
+			type: 'POST',
+			data: {'id_im': app.id_im},
+			url: app.server+'/analizar_image/',
+			success:funcion_su,
+			error:funcion_er
+		});
+	},
+} 
+
 var app = 
 {
 
@@ -507,5 +510,33 @@ allowEdit: true, destinationType: navigator.camera.DestinationType.DATA_URL });
 	}
 
 };
+
+
+var qr = 
+{
+
+leer_qr: function ()
+{
+	cordova.plugins.barcodeScanner.scan
+	(
+		function (result)
+		{
+			//alert("we got a barcode\n"+ "Result: " + result.text);
+			ajx.enviar_peticion(get_datos, ajx.funcion_er);
+              	},
+		function (error){alert("Scanning faile: "+ error);}  
+      	);    
+},
+
+
+get_datos: function(data)
+{
+	data_json = JSON.parse(data)
+	if( data_json.session_iniciada == "1") // se tiene una session iniciada
+		app.llenar_tabla_analisis(data); 	
+}
+
+
+}
 
 //app.initialize();
