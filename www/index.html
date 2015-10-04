@@ -31,18 +31,17 @@
 	<link rel="stylesheet" href="css/index.css" />
 	<link rel="stylesheet" href="css/jquery.mobile.datepicker.css" />
 	<link rel="stylesheet" href="css/jquery.mobile.datepicker.theme.css" />
-	<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
-	<!--script src="js/jquery.js"></script-->
+
+	<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 	<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
-	<!--script src="jquery.mobile/jquery.mobile-1.4.5.min.js"></script-->
+
 	<script src="js/external/jquery-ui/datepicker.js"></script>
 	<script src="js/jquery.mobile.datepicker.js"></script>
 	<script src="cordova.js"></script>
 	<script src="js/index.js"></script>
-	<script src='js/qr.js'></script>
 	<!--script src="js/ajax.js"></script--> 
 </head>
-<body>
+<body ng-app="">
 
 <!--pagina login-->
 	<!--div data-role="page" id="page_login">
@@ -65,10 +64,10 @@
 	<div data-role="page" id="page_home">
 		<div data-role="header">
 			<!--a onclick="app.takePhoto()" class="ui-btn ui-corner-all ui-shadow ui-icon-camera ui-btn-icon-left">foto</a-->
-			<a onclick="qr.leer_qr()" class="ui-btn ui-corner-all ui-shadow ui-icon-camera ui-btn-icon-left">QR</a>
+			<!--a id="boton_qr" onclick="qr.leer_qr()" class="ui-btn ui-corner-all ui-shadow ui-icon-camera ui-btn-icon-left">QR</a-->
 			<h1>PROSID</h1>
 			<a id="boton_logout" class="ui-btn ui-corner-all ui-shadow ui-icon-power ui-btn-icon-left">Log out</a>
-		</div> <!--fin header -->
+		</div>
 		
 		<div data-role="content" id="content">
 			<div id="productos">
@@ -78,9 +77,11 @@
 		<div data-role="footer" data-position="fixed">
 			<div data-role="navbar">
 				<ul>
-					<li><a href="#page_home" data-icon="home">Home</a></li>
-					<li><a id="#help" data-icon="info">Help</a>
-				</ul>        
+        			<li><a href="#page_home" data-icon="home">Home</a></li>
+					<li><a id="bt_image" data-icon="camera">QR</a></li>
+					<li><a id="bt_qr" data-icon="camera">Imagen</a></li>
+					<li><a id="#help" data-icon="info">Help</a></li>
+				</ul>
 			</div>
 		</div>  
 	</div> 
@@ -112,12 +113,18 @@
 			<h1>PROSID</h1>
 			<a onclick="app.logout()" class="ui-btn ui-corner-all ui-shadow ui-icon-power ui-btn-icon-left">Log out</a>
 		</div>
-		<div data-role="content" id="content">
-			<!--<button id="sendPhoto" data-icon="search">Buscar analisis</button>-->
-			<!--figure class="foto"><img id="photo" src=""></figure-->
-			<!-- tabla de resultados-->
-			<table id="table_resultados" data-role="table" data-mode="columntoggle" class="ui-responsive ui-shadow"></table>
-			<button id="bt_save_step1" data-icon="plus">Guardar</button>
+		<div data-role="main" class="ui-content">
+		<table data-role="table" data-mode="columntoggle" class="ui-responsive ui-shadow" id="table_resultados">
+      			<thead>
+        		<tr>
+          			<th data-priority="1">Parametro</th>
+          			<th data-priority="1">Resultado</th>
+          			<th data-priority="3">Min</th>
+          			<th data-priority="4">Max</th>
+        		</tr>
+			</thead>
+
+		</table>
 		</div>
 		<div data-role="footer" data-position="fixed" >
 			<div data-role="navbar">
@@ -230,9 +237,12 @@
 			$.mobile.selectmenu.prototype.options.nativeMenu = false;
 		});
 		app.initialize();
-		app.session_ini();
-		app.debug('page_add_std');
-		app.get_productos();
+		//$.mobile.changePage("#page_analisis");
+		//app.session_ini();
+		//app.debug('page_add_std');
+    	});
+
+
 	</script>
 </body>
 </html>
