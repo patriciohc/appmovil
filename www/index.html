@@ -1,248 +1,249 @@
 <!DOCTYPE html>
-<!--
-    Licensed to the Apache Software Foundation (ASF) under one
-    or more contributor license agreements.  See the NOTICE file
-    distributed with this work for additional information
-    regarding copyright ownership.  The ASF licenses this file
-    to you under the Apache License, Version 2.0 (the
-    "License"); you may not use this file except in compliance
-    with the License.  You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing,
-    software distributed under the License is distributed on an
-    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-     KIND, either express or implied.  See the License for the
-    specific language governing permissions and limitations
-    under the License.
--->
 <html>
 <head>
-	<meta charset="utf-8" />
-	<!--meta name="format-detection" content="telephone=no" />
-	<meta name="msapplication-tap-highlight" content="no" /-->
-	<!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. 
-	See https://issues.apache.org/jira/browse/CB-4323 -->
-	<!--meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, 
-	minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" /-->
-	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
-	<!--link rel="stylesheet" href="jquery.mobile/jquery.mobile-1.4.5.min.css"-->
-	<link rel="stylesheet" href="css/index.css" />
-	<link rel="stylesheet" href="css/jquery.mobile.datepicker.css" />
-	<link rel="stylesheet" href="css/jquery.mobile.datepicker.theme.css" />
+    <meta charset="utf-8" />
+    <!--meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" /-->
+    <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. 
+    See https://issues.apache.org/jira/browse/CB-4323 -->
+    <!--meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, 
+    minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" /-->
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+    <!--link rel="stylesheet" href="jquery.mobile/jquery.mobile-1.4.5.min.css"-->
+    <link rel="stylesheet" href="css/index.css" />
+    <link rel="stylesheet" href="css/jquery.mobile.datepicker.css" />
+    <link rel="stylesheet" href="css/jquery.mobile.datepicker.theme.css" />
 
-	<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-	<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 
-	<script src="js/external/jquery-ui/datepicker.js"></script>
-	<script src="js/jquery.mobile.datepicker.js"></script>
-	<script src="cordova.js"></script>
-	<script src="js/index.js"></script>
-	<!--script src="js/ajax.js"></script--> 
+    <script src="js/external/jquery-ui/datepicker.js"></script>
+    <script src="js/jquery.mobile.datepicker.js"></script>
+    <script src="cordova.js"></script>
+    <script src="js/index.js"></script>
+    <!--script src="js/ajax.js"></script--> 
 </head>
-<body ng-app="">
+<body>
 
 <!--pagina login-->
-	<!--div data-role="page" id="page_login">
-		<div data-role="header">
-			<h2>Autenticacion de Usuario</h2>
-		</div>
-		<div data-role="content">
-			<label> Usuario </label>
-			<input type="text" id="user" name="user"/>
-			<label> Constraseña </label>
-			<input type="password" id="password" name="password" />
-			<button id="boton_login"/>Login</button>
-			<figure id="logo">
-				<img src="img/logo2.png"/>
-				<figcaption>Prosid de Mexico S.A. de C.V.</figcaption>
-			</figure>
-		</div>
-	</div-->
+    <!--div data-role="page" id="page_login">
+        <div data-role="header">
+            <h2>Autenticacion de Usuario</h2>
+        </div>
+        <div data-role="content">
+            <label> Usuario </label>
+            <input type="text" id="user" name="user"/>
+            <label> Constraseña </label>
+            <input type="password" id="password" name="password" />
+            <button id="boton_login"/>Login</button>
+            <figure id="logo">
+                <img src="img/logo2.png"/>
+                <figcaption>Prosid de Mexico S.A. de C.V.</figcaption>
+            </figure>
+        </div>
+    </div-->
+
 <!--pagina home-->
-	<div data-role="page" id="page_home">
-		<div data-role="header">
-			<!--a onclick="app.takePhoto()" class="ui-btn ui-corner-all ui-shadow ui-icon-camera ui-btn-icon-left">foto</a-->
-			<!--a id="boton_qr" onclick="qr.leer_qr()" class="ui-btn ui-corner-all ui-shadow ui-icon-camera ui-btn-icon-left">QR</a-->
-			<h1>PROSID</h1>
-			<a id="boton_logout" class="ui-btn ui-corner-all ui-shadow ui-icon-power ui-btn-icon-left">Log out</a>
-		</div>
-		
-		<div data-role="content" id="content">
-			<div id="productos">
-			</div>
-			<a id="bt_sgt_prd" class="ui-btn ui-btn-inline ui-corner-all ui-icon-arrow-r ui-btn-icon-right">Siguiente</a>
-		</div> <!--fin div content-->
-		<div data-role="footer" data-position="fixed">
-			<div data-role="navbar">
-				<ul>
-        			<li><a href="#page_home" data-icon="home">Home</a></li>
-					<li><a id="bt_image" data-icon="camera">QR</a></li>
-					<li><a id="bt_qr" data-icon="camera">Imagen</a></li>
-					<li><a id="#help" data-icon="info">Help</a></li>
-				</ul>
-			</div>
-		</div>  
-	</div> 
+    <div data-role="page" id="page_home">
+        <div data-role="header">
+            <h1>PROSID DE MEXICO</h1>
+            <a id="boton_logout" class="ui-btn ui-corner-all ui-shadow ui-icon-power ui-btn-icon-left">
+                salir
+            </a>
+        </div>
+        
+        <div data-role="content" id="content">
+            <div id="productos">
+            </div>
+            <a id="bt_sgt_prd" class="ui-btn ui-btn-inline ui-corner-all ui-icon-arrow-r ui-btn-icon-right">
+                Siguiente
+            </a>
+        </div> <!--fin div content-->
+        <div data-role="footer" data-position="fixed">
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="#page_home" data-icon="home">Home</a></li>
+                    <li><a id="bt_qr" data-icon="camera">QR</a></li>
+                    <li><a id="bt_image" data-icon="camera">Imagen</a></li>
+                    <li><a id="#help" data-icon="info">Help</a></li>
+                </ul>
+            </div>
+        </div>  
+    </div>
+
 <!--pagina despues de tomar foto para analisis  -->
-	<div data-role="page" id = "page_take_potho">
-		<div data-role="header">
-			<a onclick="app.takePhoto()" class="ui-btn ui-corner-all ui-shadow ui-icon-camera ui-btn-icon-left">Foto</a>
-			<h1>PROSID</h1>
-			<a onclick="app.logout()" class="ui-btn ui-corner-all ui-shadow ui-icon-power ui-btn-icon-left">Log out</a>
-		</div> <!--fin header -->
-		<div data-role="content" id="content">
-			<figure class="foto"><img id="photo" src=""></figure>
-			<button id="bt_analizar" data-icon="action">Analizar</button>
-			<button id="bt_add_std" data-icon="plus">Agregar patron</button>
-		</div>
-		<div data-role="footer" data-position="fixed">
-			<div data-role="navbar">
-				<ul>
-					<li><a href="#page_home" data-icon="home">Home</a></li>
-					<li><a id="#help" data-icon="info">Help</a>
-				</ul>        
-			</div>
-		</div>
-	</div>
+    <div data-role="page" id = "page_take_potho">
+        <div data-role="header">
+            <h1>PROSID DE MEXICO</h1>
+            <a id="boton_logout" class="ui-btn ui-corner-all ui-shadow ui-icon-power ui-btn-icon-left">
+                salir
+            </a>
+        </div> <!--fin header -->
+        <div data-role="content" id="content">
+            <figure class="foto"><img id="photo" src=""></figure>
+            <button id="bt_analizar" data-icon="action">Analizar</button>
+            <button id="bt_add_std" data-icon="plus">Agregar patron</button>
+        </div>
+        <div data-role="footer" data-position="fixed">
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="#page_home" data-icon="home">Home</a></li>
+                    <li><a id="bt_qr" data-icon="camera">QR</a></li>
+                    <li><a id="bt_image" data-icon="camera">Imagen</a></li>
+                    <li><a id="#help" data-icon="info">Help</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
 <!--pagina donde se muestra analisis recibido-->
-	<div data-role="page" id ="page_analisis">
-		<div data-role="header">
-			<a onclick="app.takePhoto()" class="ui-btn ui-corner-all ui-shadow ui-icon-camera ui-btn-icon-left">Foto</a>
-			<h1>PROSID</h1>
-			<a onclick="app.logout()" class="ui-btn ui-corner-all ui-shadow ui-icon-power ui-btn-icon-left">Log out</a>
-		</div>
-		<div data-role="main" class="ui-content">
-		<table data-role="table" data-mode="columntoggle" class="ui-responsive ui-shadow" id="table_resultados">
-      			<thead>
-        		<tr>
-          			<th data-priority="1">Parametro</th>
-          			<th data-priority="1">Resultado</th>
-          			<th data-priority="3">Min</th>
-          			<th data-priority="4">Max</th>
-        		</tr>
-			</thead>
+    <div data-role="page" id ="page_analisis">
+        <div data-role="header">
+            <h1>PROSID DE MEXICO</h1>
+            <a id="boton_logout" class="ui-btn ui-corner-all ui-shadow ui-icon-power ui-btn-icon-left">
+                salir
+            </a>
+        </div>
+        <div data-role="main" class="ui-content">
+        <table data-role="table" data-mode="columntoggle" class="ui-responsive ui-shadow" id="table_resultados">
+                  <thead>
+                <tr>
+                      <th data-priority="1">Parametro</th>
+                      <th data-priority="1">Resultado</th>
+                      <th data-priority="3">Min</th>
+                      <th data-priority="4">Max</th>
+                </tr>
+            </thead>
 
-		</table>
-		</div>
-		<div data-role="footer" data-position="fixed" >
-			<div data-role="navbar">
-				<ul>
-					<li><a href="#page_home" data-icon="home">Home</a></li>
-					<li><a id="#help" data-icon="camera">Help</a>
-				</ul>        
-			</div>
-		</div>
-	</div>
+        </table>
+        </div>
+        <div data-role="footer" data-position="fixed" >
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="#page_home" data-icon="home">Home</a></li>
+                    <li><a id="bt_qr" data-icon="camera">QR</a></li>
+                    <li><a id="bt_image" data-icon="camera">Imagen</a></li>
+                    <li><a id="#help" data-icon="info">Help</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
 <!--pagina donde se agregan nuevos estandates-->
-	<div data-role="page" id ="page_add_std">
-		<div data-role="header">
-			<a onclick="app.takePhoto()" class="ui-btn ui-corner-all ui-shadow ui-icon-camera ui-btn-icon-left">Foto</a>
-			<h1>PROSID</h1>
-			<a onclick="app.logout()" class="ui-btn ui-corner-all ui-shadow ui-icon-power ui-btn-icon-left">Log out</a>
-		</div> <!--fin header -->
-		
-		<div data-role="content" id="content">
-			<fieldset class="ui-field-contain">
-				<select name="filtro_cliente" id="filtro_cliente">
-					<option value="sin_select">Filtrar por cliente</option>
-				</select>
-				<select name="filtro_año" id="filtro_año">
-					<option value="no_select">seleccione año</option>
-					<option value="2013">2013</option>
-					<option value="2014">2014</option>
-					<option value="2015">2015</option>
-				</select>
-				<select name="filtro_mes" id="filtro_mes">
-					<option value="no_select">Filtrar por mes</option>
-					<option value="Enero">Enero</option>
-					<option value="Febrero">Febrero</option>
-					<option value="Marzo">Marzo</option>
-					<option value="Abril">Abril</option>
-					<option value="Mayo">Mayo</option>
-					<option value="Junio">Junio</option>
-					<option value="Julio">Julio</option>
-					<option value="Agosto">Agosto</option>
-					<option value="Septiembre">Septiembre</option>
-					<option value="Octubre">Octubre</option>
-					<option value="Noviembre">Noviembre</option>
-					<option value="Diciembre">Diciembre</option>
-					<option value="all">Todos</option>
-				</select>
-			</fieldset>
-			<ul id="muestras" data-role="listview" data-inset="true"></ul>   
-		</div>
-		<div data-role="footer" data-position="fixed">
-			<div data-role="navbar">
-				<ul>
-					<li><a href="#page_home" data-icon="home">Home</a></li>
-					<li><a id="#help" data-icon="camera">Help</a></li>
-				</ul>        
-			</div>
-		</div>
-	</div>
+    <div data-role="page" id ="page_add_std">
+        <div data-role="header">
+            <h1>PROSID DE MEXICO</h1>
+            <a id="boton_logout" class="ui-btn ui-corner-all ui-shadow ui-icon-power ui-btn-icon-left">
+                salir
+            </a>
+        </div> <!--fin header -->
+        
+        <div data-role="content" id="content">
+            <fieldset class="ui-field-contain">
+                <select name="filtro_cliente" id="filtro_cliente">
+                    <option value="sin_select">Filtrar por cliente</option>
+                </select>
+                <select name="filtro_año" id="filtro_año">
+                    <option value="no_select">seleccione año</option>
+                    <option value="2013">2013</option>
+                    <option value="2014">2014</option>
+                    <option value="2015">2015</option>
+                </select>
+                <select name="filtro_mes" id="filtro_mes">
+                    <option value="no_select">Filtrar por mes</option>
+                    <option value="Enero">Enero</option>
+                    <option value="Febrero">Febrero</option>
+                    <option value="Marzo">Marzo</option>
+                    <option value="Abril">Abril</option>
+                    <option value="Mayo">Mayo</option>
+                    <option value="Junio">Junio</option>
+                    <option value="Julio">Julio</option>
+                    <option value="Agosto">Agosto</option>
+                    <option value="Septiembre">Septiembre</option>
+                    <option value="Octubre">Octubre</option>
+                    <option value="Noviembre">Noviembre</option>
+                    <option value="Diciembre">Diciembre</option>
+                    <option value="all">Todos</option>
+                </select>
+            </fieldset>
+            <ul id="muestras" data-role="listview" data-inset="true"></ul>   
+        </div>
+        <div data-role="footer" data-position="fixed">
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="#page_home" data-icon="home">Home</a></li>
+                    <li><a id="bt_qr" data-icon="camera">QR</a></li>
+                    <li><a id="bt_image" data-icon="camera">Imagen</a></li>
+                    <li><a id="#help" data-icon="info">Help</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
 <!--pagina guradar estandar-->
-	<div data-role="page" id ="page_save1">
-		<div data-role="header">
-			<a onclick="app.takePhoto()" class="ui-btn ui-corner-all ui-shadow ui-icon-camera ui-btn-icon-left">Foto</a>
-			<h1>PROSID</h1>
-			<a onclick="app.logout()" class="ui-btn ui-corner-all ui-shadow ui-icon-power ui-btn-icon-left">Log out</a>
-		</div> <!--fin header -->
-		<div data-role="content" id="content">
-			<fieldset class="ui-field-contain">
-				<select name="s_cliente" id="s_cliente">
-					<option value="cliente_234">Cliente</option>
-					<option value="cliente_123">Simec Internacional</option>
-				</select>
-				<select name="s_folio" id="s_folio">
-					<option value="cliente_234">Folio/Nuevo</option>
-					<option value="cliente_123">444-15/03/15-Monitoreo de coladas</option>
-				</select>
-			</fieldset>
-			<input data-role="date" type="text" placeholder="Fecha"/>
-			<label for="name">No de Colada:</label>
-			<input type="text" name="name" id="name" value=""  />
-			<select name="s_cliente" id="s_cliente" data-native-menu="false">
-				<option value="cliente_234">Lugar de muestreo</option>
-				<option value="cliente_123">Oxidacion</option>
-				<option value="cliente_123">Fusion</option>
-				<option value="cliente_123">Olla</option>
-			</select>
-			<label for="name">Numero de muestra:</label>
-			<input type="text" name="name" id="name" value=""  />
-			<button id="boton_login"/>Guardar</button>
-		</div>
-	</div>
+    <div data-role="page" id ="page_save1">
+        <div data-role="header">
+            <h1>PROSID DE MEXICO</h1>
+            <a id="boton_logout" class="ui-btn ui-corner-all ui-shadow ui-icon-power ui-btn-icon-left">
+                salir
+            </a>
+        </div> <!--fin header -->
+        <div data-role="content" id="content">
+            <fieldset class="ui-field-contain">
+                <select name="s_cliente" id="s_cliente">
+                    <option value="cliente_234">Cliente</option>
+                    <option value="cliente_123">Simec Internacional</option>
+                </select>
+                <select name="s_folio" id="s_folio">
+                    <option value="cliente_234">Folio/Nuevo</option>
+                    <option value="cliente_123">444-15/03/15-Monitoreo de coladas</option>
+                </select>
+            </fieldset>
+            <input data-role="date" type="text" placeholder="Fecha"/>
+            <label for="name">No de Colada:</label>
+            <input type="text" name="name" id="name" value=""  />
+            <select name="s_cliente" id="s_cliente" data-native-menu="false">
+                <option value="cliente_234">Lugar de muestreo</option>
+                <option value="cliente_123">Oxidacion</option>
+                <option value="cliente_123">Fusion</option>
+                <option value="cliente_123">Olla</option>
+            </select>
+            <label for="name">Numero de muestra:</label>
+            <input type="text" name="name" id="name" value=""  />
+            <button id="boton_login"/>Guardar</button>
+        </div>
+    </div>
+
 <!--***************************************-->
-	<div data-role="page" id ="page_save2">
-		<div data-role="header">
-			<a onclick="app.takePhoto()" class="ui-btn ui-corner-all ui-shadow ui-icon-camera ui-btn-icon-left">Foto</a>
-			<h1>PROSID</h1>
-			<a onclick="app.logout()" class="ui-btn ui-corner-all ui-shadow ui-icon-power ui-btn-icon-left">Log out</a>
-		</div> <!--fin header -->
-		<div data-role="content" id="content"></div>
-		<div data-role="footer" data-position="fixed">
-			<div data-role="navbar">
-			    <ul>
-			    <li><a href="#page_home" data-icon="home">Home</a></li>
-			    <li><a id="#help" data-icon="camera">Help</a>
-			    </ul>        
-			</div>
-		</div> <!--fin footer -->
-	</div>
+    <div data-role="page" id ="page_save2">
+        <div data-role="header">
+            <h1>PROSID DE MEXICO</h1>
+            <a id="boton_logout" class="ui-btn ui-corner-all ui-shadow ui-icon-power ui-btn-icon-left">
+                salir
+            </a>
+        </div> <!--fin header -->
+        <div data-role="content" id="content"></div>
+        <div data-role="footer" data-position="fixed">
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="#page_home" data-icon="home">Home</a></li>
+                    <li><a id="bt_qr" data-icon="camera">QR</a></li>
+                    <li><a id="bt_image" data-icon="camera">Imagen</a></li>
+                    <li><a id="#help" data-icon="info">Help</a></li>
+                </ul>
+            </div>
+        </div> <!--fin footer -->
+    </div>
 <!--****javascript****-->
-	<script>
-		$(document).bind('mobileinit',function(){
-			$.mobile.selectmenu.prototype.options.nativeMenu = false;
-		});
-		app.initialize();
-		//$.mobile.changePage("#page_analisis");
-		//app.session_ini();
-		//app.debug('page_add_std');
-    	});
-
-
-	</script>
+    <script>
+        $(document).bind('mobileinit',function(){
+            $.mobile.selectmenu.prototype.options.nativeMenu = false;
+        });
+        app.initialize();
+        app.get_productos();
+        //$.mobile.changePage("#page_analisis");
+        //app.session_ini();
+        //app.debug('page_add_std');
+    </script>
 </body>
 </html>
