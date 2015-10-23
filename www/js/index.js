@@ -26,6 +26,8 @@ var ajx =
                         alert('Requested page not found [404]');
                 } else if (jqXHR.status == 500) {
                         alert('Internal Server Error [500].');
+                        //window.open(jqXHR.responseText,'_blank');
+                        alert(jqXHR.responseText);
                         //console.log("error: "+jqXHR.responseText)
                 } else if (textStatus === 'parsererror') {
                         alert('Requested JSON parse failed.');
@@ -190,18 +192,15 @@ añade evento a cada item de las lista*/
         if(mes == "no_select") return true;             
         if(cliente == 'all') cliente = "";
         if(mes == "all") mes = "";
-        var datos =
-            {
-                'operacion':'filtros',
-                'f':'muestras',
+        var datos = {
+                'operacion':'get_muestras',
                 'cliente':cliente,
                 'anio':año,
                 'mes':mes
             };
-        ajx.enviar_peticion(app.change_filtros, "", "/appmovil.php", datos);
+        ajx.enviar_peticion(app.change_filtros, "", "/filtrar/", datos);
     },
-    
-        
+
     login: function(data)
     {
         data_json = JSON.parse(data)
@@ -254,7 +253,8 @@ añade evento a cada item de las lista*/
         url = productos[app.prd_act].getElementsByTagName("url")[0].childNodes[0].nodeValue;
         html = "<h1>"+name_prod+"</h1><hr/>"; // nombre del producto
         html += "<p>"+descripcion; // descripcion del producto
-        html += "<a onclick=\"window.open('"+url+"', "+"'_system', "+"'location=n0')\"> Consultar especificacion</a> </p>";
+        html += "<a onclick=\"window.open('" + url + "', " + "'_system', "
+                + "'location=n0')\"> Consultar especificacion</a> </p>";
         app.prd_act+=1;
         var div_productos = document.getElementById("productos");
         div_productos.innerHTML = html;
@@ -270,6 +270,41 @@ añade evento a cada item de las lista*/
     {
         var datos = {};
         ajx.enviar_peticion(app.ini_productos, "", "/productos.xml", datos);
+    },
+
+/* funcion que se ejecuta al dar click en el boton bt_add_std
+envia peticion al servidor para pedir los clientes registrados y poder filtrar muestras
+envia imagen a servidor muestras el ususario se ocupa de filtrar muestras*/
+    filtros_std: function(data)
+    {
+        data_json = JSON.parse(data)
+        if ( data_json.session_iniciada == "1") {
+            var c = data_json.clientes;
+            var html = "<option>Filtrar por cliente</option>";
+            for (var i = 0; i < c.length; i++) {
+                html = html + "<option "+"value='"+c[i]+"'>"+c[i]+"</option>"
+            }
+            html = html + "<option value='all'>incluir todos</option>"
+            $('#filtro_cliente').html(html)
+            $.mobile.changePage("#page_add_std");   
+            app.send_image(); 
+        }
+        else {
+            alert("session no iniciada");
+        }
+    },
+
+    bt_add_std: function()
+    {
+        var date = new Date();
+        if(document.getElementById("filtro_mes").value == "no_select")
+            document.getElementById("filtro_mes").value = app.meses[date.getMonth()];
+        if(document.getElementById("filtro_año").value == "no_select")
+            document.getElementById("filtro_año").value = date.getFullYear();  
+        datos = {
+            'operacion':'get_clientes'
+        };
+        ajx.enviar_peticion(app.filtros_std, "", "/filtrar/", datos);
     },
 
           /* <h1>LUGITEC F/T</h1><hr/>
@@ -368,42 +403,6 @@ al recibir repuesta llama a funcion para el llenado de la tabla con el analisis 
         else{
             //aler("error al tomar imagen")
         }
-    },
-
-/* funcion que se ejecuta al dar click en el boton bt_add_std
-envia peticion al servidor para pedir los clientes registrados y poder filtrar muestras
-envia imagen a servidor muestras el ususario se ocupa de filtrar muestras*/
-    filtros_std: function(data)
-    {
-        data_json = JSON.parse(data)
-        if ( data_json.session_iniciada == "1") {
-            var c = data_json.clientes;
-            var html = "<option>Filtrar por cliente</option>";
-            for (var i = 0; i < c.length; i++) {
-                html = html + "<option "+"value='"+c[i]+"'>"+c[i]+"</option>"
-            }
-            html = html + "<option value='all'>incluir todos</option>"
-            $('#filtro_cliente').html(html)
-            $.mobile.changePage("#page_add_std");   
-            app.send_image(); 
-        }
-        else {
-            alert("session no iniciada");
-        }
-    },
-
-    bt_add_std: function()
-    {
-        var date = new Date();
-        if(document.getElementById("filtro_mes").value == "no_select")
-            document.getElementById("filtro_mes").value = app.meses[date.getMonth()];
-        if(document.getElementById("filtro_año").value == "no_select")
-            document.getElementById("filtro_año").value = date.getFullYear();  
-        datos = {
-            'operacion':'filtros',
-            'f':'clientes'
-        };
-        ajx.enviar_peticion(Imagen.filtros, "", "appmovil", datos);    
     },
 
 /*envia peticion al servidor para establer la relacion entre la imagen y el analisis de la muestra*/
