@@ -63,9 +63,9 @@
             <div data-role="navbar">
                 <ul>
                     <li><a href="#page_home" data-icon="home">Home</a></li>
-                    <li><a id="bt_qr" data-icon="camera">QR</a></li>
-                    <li><a id="bt_image" data-icon="camera">Imagen</a></li>
-                    <li><a id="#help" data-icon="info">Help</a></li>
+                    <li><a onclick="qr.leer_qr()" data-icon="camera">QR</a></li>
+                    <li><a onclick="Imagen.take_image()" data-icon="camera">Imagen</a></li>
+                    <li><a href="#help" data-icon="info">Help</a></li>
                 </ul>
             </div>
         </div>  
@@ -88,9 +88,9 @@
             <div data-role="navbar">
                 <ul>
                     <li><a href="#page_home" data-icon="home">Home</a></li>
-                    <li><a id="bt_qr" data-icon="camera">QR</a></li>
-                    <li><a id="bt_image" data-icon="camera">Imagen</a></li>
-                    <li><a id="#help" data-icon="info">Help</a></li>
+                    <li><a onclick="qr.leer_qr()" data-icon="camera">QR</a></li>
+                    <li><a onclick="Imagen.take_image()" data-icon="camera">Imagen</a></li>
+                    <li><a href="#help" data-icon="info">Help</a></li>
                 </ul>
             </div>
         </div>
@@ -121,9 +121,9 @@
             <div data-role="navbar">
                 <ul>
                     <li><a href="#page_home" data-icon="home">Home</a></li>
-                    <li><a id="bt_qr" data-icon="camera">QR</a></li>
-                    <li><a id="bt_image" data-icon="camera">Imagen</a></li>
-                    <li><a id="#help" data-icon="info">Help</a></li>
+                    <li><a onclick="qr.leer_qr()" data-icon="camera">QR</a></li>
+                    <li><a onclick="Imagen.take_image()" data-icon="camera">Imagen</a></li>
+                    <li><a href="#help" data-icon="info">Help</a></li>
                 </ul>
             </div>
         </div>
@@ -172,9 +172,9 @@
             <div data-role="navbar">
                 <ul>
                     <li><a href="#page_home" data-icon="home">Home</a></li>
-                    <li><a id="bt_qr" data-icon="camera">QR</a></li>
-                    <li><a id="bt_image" data-icon="camera">Imagen</a></li>
-                    <li><a id="#help" data-icon="info">Help</a></li>
+                    <li><a onclick="qr.leer_qr()" data-icon="camera">QR</a></li>
+                    <li><a onclick="Imagen.take_image()" data-icon="camera">Imagen</a></li>
+                    <li><a href="#help" data-icon="info">Help</a></li>
                 </ul>
             </div>
         </div>
@@ -227,9 +227,9 @@
             <div data-role="navbar">
                 <ul>
                     <li><a href="#page_home" data-icon="home">Home</a></li>
-                    <li><a id="bt_qr" data-icon="camera">QR</a></li>
-                    <li><a id="bt_image" data-icon="camera">Imagen</a></li>
-                    <li><a id="#help" data-icon="info">Help</a></li>
+                    <li><a onclick="qr.leer_qr()" data-icon="camera">QR</a></li>
+                    <li><a onclick="Imagen.take_image()" data-icon="camera">Imagen</a></li>
+                    <li><a href="#help" data-icon="info">Help</a></li>
                 </ul>
             </div>
         </div> <!--fin footer -->
@@ -241,9 +241,6 @@
         });
         app.initialize();
         app.get_productos();
-        //$.mobile.changePage("#page_analisis");
-        //app.session_ini();
-        //app.debug('page_add_std');
     </script>
 </body>
 </html>
