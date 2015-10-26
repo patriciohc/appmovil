@@ -1,4 +1,9 @@
 
+
+SUCCESS = 0  // Operacion realizada con exito
+NO_SESSION = 1  // no se tiene una sesion iniciada
+ERROR = 2  // ocurrio un erro, normalmente vendra con msg
+
 /*funciones de conexion con el servidor*/
 var ajx = 
 {
@@ -38,7 +43,6 @@ var ajx =
                 } else {
                         alert('Uncaught Error: ' + jqXHR.responseText);
                 }
-
             });
     }
 };
@@ -73,17 +77,8 @@ var app =
 
     bindEvents: function() 
     {
-        // boton toma foto
-        var bt_image = document.getElementById('bt_image');  
-        bt_image.addEventListener('click', Imagen.take_image, false);
-        // funcion lee codigo qr
-        var bt_qr = document.getElementById('bt_qr'); 
-        bt_qr.addEventListener('click', qr.leer_qr, false);
-
         var bt_analizar = document.getElementById('bt_analizar');  
-        bt_analizar.addEventListener('click', Imagen.bt_analizar_foto, false);  
-        //var home = document.getElementById('home');  
-        //home.addEventListener('click', app.home, false); 
+        bt_analizar.addEventListener('click', Imagen.bt_analizar_foto, false);
         //var logout = document.getElementById('boton_logout');  
         //logout.addEventListener('click', app.logout, false);  
         var bt_login = document.getElementById('boton_login');  
@@ -136,15 +131,16 @@ var app =
             celda.innerHTML = 0;
             fila.appendChild(celda);
         }
-        $('#table_resultados').table('refresh');          
+        $('#table_resultados').table('refresh');
     },
 
 /*funcion que se ejecuta al filtrar muestras mediante los select(cliente, año, y mes)
 procesa la informacion recibida del servidor y añade un lista de las muestras obtenidas en el filtrado
 añade evento a cada item de las lista*/
     change_filtros: function(data)
-    { 
-        if (data_json.session_iniciada == "1") {
+    {
+        data_json = JSON.parse(data);
+        if (data_json.type_response != NO_SESSION) {
             app.muestras = data_json.muestras;
             //var select = document.getElementById("muestras");
             var lista = document.getElementById("muestras");
@@ -155,15 +151,15 @@ añade evento a cada item de las lista*/
                 var m = app.muestras[i];
                 var cliente = m.cliente;
                 cliente =  cliente.toUpperCase();
-                //if(cliente == "ASF-K DE MEXICO") dir_img ="img/asf-k.jpg";
-                //if(cliente == "SIMEC INTERNACIONAL PLANTA MEXICALI") dir_img ="img/simec.jpg";
-                //if(cliente == "ACINOX TUNAS") dir_img ="img/acinox.bmp";
-                if(cliente.indexOf('ASF-K') != -1 ) dir_img ="img/asf-k.jpg";
-                if(cliente.indexOf('SIMEC') != -1 ) dir_img ="img/simec.jpg";
-                if(cliente.indexOf('ACINOX') !=-1 ) dir_img ="img/acinox.jpg";
+                if (cliente.indexOf('ASF-K') != -1 )
+                    dir_img ="img/asf-k.jpg";
+                if (cliente.indexOf('SIMEC') != -1 )
+                    dir_img ="img/simec.jpg";
+                if (cliente.indexOf('ACINOX') != -1 )
+                    dir_img ="img/acinox.jpg";
                 var no_analisis = m.no_analisis;
                 var li = document.createElement('li');
-                var f = "app.add_std("+no_analisis+");";
+                var f = "Imagen.add_std("+no_analisis+");";
                 li.setAttribute('onclick',f);
                 lista.appendChild(li);
                 var a = document.createElement('a');
@@ -278,7 +274,7 @@ envia imagen a servidor muestras el ususario se ocupa de filtrar muestras*/
     filtros_std: function(data)
     {
         data_json = JSON.parse(data)
-        if ( data_json.session_iniciada == "1") {
+        if ( data_json.response != NO_SESSION) {
             var c = data_json.clientes;
             var html = "<option>Filtrar por cliente</option>";
             for (var i = 0; i < c.length; i++) {
@@ -286,8 +282,7 @@ envia imagen a servidor muestras el ususario se ocupa de filtrar muestras*/
             }
             html = html + "<option value='all'>incluir todos</option>"
             $('#filtro_cliente').html(html)
-            $.mobile.changePage("#page_add_std");   
-            app.send_image(); 
+            $.mobile.changePage("#page_add_std");
         }
         else {
             alert("session no iniciada");
@@ -357,17 +352,18 @@ var Imagen =
     muestras: null,
 
     recibir_info: function (data){
-        json = ajx.parse_json(data);
-        if (len(json) == 0) { 
+        json = JSON.parse(data);
+        if (json.length == 0) {
             alert("no se recibieron datos");
             return;
         }
-        switch (json.type_response) { 
+        switch (json.response) { 
             case "get_analisis":
                 app.llenar_tabla(json);
                 break;
             case "set_id_image":
-                Image.id_image = json.id_image;
+                alert("estableciondo id_image: "+Image);
+                Imagen.id_image = json.id_image;
                 break;
         }
     },
@@ -406,20 +402,26 @@ al recibir repuesta llama a funcion para el llenado de la tabla con el analisis 
     },
 
 /*envia peticion al servidor para establer la relacion entre la imagen y el analisis de la muestra*/
-    add_std: function(no_analisis)
+    add_std: function(id_analisis)
     {
+        alert(Imagen.id_image)
         $.ajax({
             type: 'POST',
-            data: {'f':'add_std', 'id_im':app.id_im, 'no_analisis':no_analisis},
+            data: {
+                'operacion':'add_std',
+                'id_image':Imagen.id_image,
+                'id_analisis':id_analisis
+            },
             //url: app.server+'/add_std/',
-            url: app.server+'/appmovil.php',
+            url: ajx.server+'/appmovil-image/',
             success: function(data)
             { 
                 data_json = JSON.parse(data)
-                if( data_json.session_iniciada == "1"){
-                    alert("se agrego patron al numero de analisis: "+no_analisis);
+                if ( data_json.type_response != NO_SESSION){
+                    alert(data_json.msg);
+                } else {
+                    alert("session no iniciada");
                 }
-                else{alert("session no iniciada");}
             },
             error: function()
             {
