@@ -134,7 +134,8 @@ var app =
         $.mobile.changePage("#page_analisis");
         var tabla = document.getElementById('table_resultados');
         // Crear sección <tbody>
-        var tbody = document.createElement('tbody');
+        var tbody = document.getElementById('resultados');
+        tbody.innerHTML = "";
         tabla.appendChild(tbody);
         for (var i = 0; i < datos_analisis.length; i++){
             var analisis = datos_analisis[i];
@@ -174,11 +175,11 @@ añade evento a cada item de las lista*/
                 var m = app.muestras[i];
                 var cliente = m.cliente;
                 cliente =  cliente.toUpperCase();
-                if (cliente.indexOf('ASF-K') != -1 )
+                if (cliente.indexOf('ASF-K') != -1)
                     dir_img ="img/asf-k.jpg";
-                if (cliente.indexOf('SIMEC') != -1 )
+                if (cliente.indexOf('SIMEC') != -1)
                     dir_img ="img/simec.jpg";
-                if (cliente.indexOf('ACINOX') != -1 )
+                if (cliente.indexOf('ACINOX') != -1)
                     dir_img ="img/acinox.jpg";
                 var no_analisis = m.no_analisis;
                 var li = document.createElement('li');
@@ -385,7 +386,6 @@ var Imagen =
                 app.llenar_tabla(json);
                 break;
             case "set_id_image":
-                alert("estableciondo id_image: "+Image);
                 Imagen.id_image = json.id_image;
                 break;
         }
@@ -427,7 +427,6 @@ al recibir repuesta llama a funcion para el llenado de la tabla con el analisis 
 /*envia peticion al servidor para establer la relacion entre la imagen y el analisis de la muestra*/
     add_std: function(id_analisis)
     {
-        alert(Imagen.id_image)
         $.ajax({
             type: 'POST',
             data: {
