@@ -483,6 +483,8 @@ var qr =
     {
         var data_json = JSON.parse(data);
         //if( data_json.session_iniciada == "1") // se tiene una session iniciada
+        a = document.getElementById('product_lote');
+        a.innerHTML = "Lote: " + data_json.lote;
         var analisis = data_json.analisis;
         app.llenar_tabla_analisis(analisis);
     },
@@ -494,9 +496,16 @@ var qr =
         (
             function (result)
             {
+                json = JSON.parse(result.text);
+                //alert(json.nombre);
+                //alert(json.id_analisis);
+                a = document.getElementById('product_name');
+                a.innerHTML = "Producto: " + json.nombre;
+                a = document.getElementById('product_id_analisis');
+                a.innerHTML = "N° Analisis: " + json.id_analisis;
                 datos = {
                     'operacion': 'get_analisis',
-                    'id_analisis': result.text
+                    'id_analisis': json.id_analisis,
                 };
                 ajx.enviar_peticion(qr.get_datos, "", "/appmovil-qr/", datos);
                       },
