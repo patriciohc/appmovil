@@ -210,6 +210,29 @@
         </div>
     </div>
 
+<!--pagina donde se agregan nuevos estandates-->
+    <div data-role="page" id ="help">
+        <div data-role="header">
+            <h1>PROSID DE MEXICO</h1>
+            <a id="boton_logout" class="ui-btn ui-corner-all ui-shadow ui-icon-power ui-btn-icon-left">
+                salir
+            </a>
+        </div> <!--fin header -->
+        
+        <div data-role="content" id="content">
+
+        </div>
+        <div data-role="footer" data-position="fixed">
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="#page_home" data-icon="home">Home</a></li>
+                    <li><a onclick="qr.leer_qr()" data-icon="camera">QR</a></li>
+                    <li><a onclick="Imagen.take_image()" data-icon="camera">Imagen</a></li>
+                    <li><a href="#help" data-icon="info">Help</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
 <!--pagina guradar estandar-->
     <div data-role="page" id ="page_save1">
         <div data-role="header">
