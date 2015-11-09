@@ -87,6 +87,33 @@
             <div data-role="navbar">
                 <ul>
                     <li><a href="#page_home" data-icon="home">Home</a></li>
+                    <li><a href="#page_c_analisis" data-icon="camera">A</a></li>
+                    <li><a onclick="Imagen.take_image()" data-icon="camera">Imagen</a></li>
+                    <li><a href="#help" data-icon="info">Help</a></li>
+                </ul>
+            </div>
+        </div>  
+    </div>
+
+
+<!--pagina busqueda de analisis-->
+    <div data-role="page" id="page_c_analisis">
+        <div data-role="header">
+            <h1>PROSID DE MEXICO</h1>
+            <a id="boton_logout" class="ui-btn ui-corner-all ui-shadow ui-icon-power ui-btn-icon-left">
+                salir
+            </a>
+        </div>
+        <div data-role="content" id="content">
+            <label>Introdusca Numero de analsis<label>
+            <input type="text" id="txt_id_analisis" name="txt_id_analisis" type="number"/>
+            <button id="bt_c_analisis"/>Consultar Analisis</button>
+            <button id='bt_leer_qr'>LEER QR</button>
+        </div> <!--fin div content-->
+        <div data-role="footer" data-position="fixed">
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="#page_home" data-icon="home">Home</a></li>
                     <li><a onclick="qr.leer_qr()" data-icon="camera">QR</a></li>
                     <li><a onclick="Imagen.take_image()" data-icon="camera">Imagen</a></li>
                     <li><a href="#help" data-icon="info">Help</a></li>
@@ -94,6 +121,7 @@
             </div>
         </div>  
     </div>
+
 
 <!--pagina despues de tomar foto para analisis  -->
     <div data-role="page" id = "page_take_potho">

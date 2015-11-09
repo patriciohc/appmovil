@@ -100,6 +100,12 @@ var app =
 
     bindEvents: function() 
     {
+        var bt_c_analisis = document.getElementById('bt_c_analisis');
+        bt_c_analisis.addEventListener('click', qr.bt_c_a, false);
+
+        var bt_leer_qr = document.getElementById('bt_leer_qr');
+        bt_leer_qr.addEventListener('click', qr.leer_qr, false);
+
         var bt_analizar = document.getElementById('bt_analizar');  
         bt_analizar.addEventListener('click', Imagen.bt_analizar_foto, false);
         //var logout = document.getElementById('boton_logout');  
@@ -503,14 +509,24 @@ var qr =
                 a.innerHTML = "Producto: " + json.nombre;
                 a = document.getElementById('product_id_analisis');
                 a.innerHTML = "N° Analisis: " + json.id_analisis;
-                datos = {
-                    'operacion': 'get_analisis',
-                    'id_analisis': json.id_analisis,
-                };
-                ajx.enviar_peticion(qr.get_datos, "", "/appmovil-qr/", datos);
-                      },
+                qr.enviar_datos(json.id_analisis)
+            },
             function (error){alert("Scanning faile: "+ error);}  
         );    
+    },
+
+    bt_c_a: function(){
+        var id_analisis = $('#txt_id_analisis').val();
+        alert(id_analisis)
+        //qr.enviar_datos(id_analisis);
+    },
+
+    enviar_datos: function(id_analisis){
+        datos = {
+            'operacion': 'get_analisis',
+            'id_analisis': id_analisis
+        };
+        ajx.enviar_peticion(qr.get_datos, "", "/appmovil-qr/", datos);
     }
 
 
